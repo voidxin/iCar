@@ -1,0 +1,100 @@
+
+<!-- 
+  tabbar,由于接口在浏览中的跨域问题，不得不放弃使用tabBar,而直接展示头条页面，方便调试
+  来自voidxin，创建于2016年12月20日,
+  转载请声明 
+-->
+<template>
+  <div>
+    <wxc-tabbar tab-items="{{tabItems}}"></wxc-tabbar>
+  </div>
+</template>
+
+<script>
+  require('weex-components');
+  module.exports = {
+    data: {
+      baseURL:'',
+      tabItems: [
+        {
+          index: 0,
+          title: '头条',
+          titleColor: 'orange',
+          icon: '',
+          image: 'http://7xwl0f.com1.z0.glb.clouddn.com/tabbar_0_night_N.png',
+          selectedImage: 'http://7xwl0f.com1.z0.glb.clouddn.com/tabbar_0_day_H@2x.png',
+          src:'dist/toutiao.js',
+          visibility: 'visible',
+        },
+        {
+          index: 1,
+          title: '选车',
+          titleColor: '#000000',
+          icon: '',
+          image: 'http://7xwl0f.com1.z0.glb.clouddn.com/tabbar_2_night_N@2x.png',
+          selectedImage: 'http://7xwl0f.com1.z0.glb.clouddn.com/tabbar_2_night_H@2x.png',
+          src: '',
+          visibility: 'hidden',
+        },
+        {
+          index: 2,
+          title: '我的',
+          titleColor: '#000000',
+          icon: '',
+          image: 'http://7xwl0f.com1.z0.glb.clouddn.com/tabbar_4_day_N@2x.png',
+          selectedImage: 'http://7xwl0f.com1.z0.glb.clouddn.com/tabbar_4_day_H@2x.png',
+          src: '',
+          visibility: 'hidden',
+        }
+      ],
+      
+      dir:'',
+    },
+    created: function() {
+      var vm = this;
+      vm.$on('tabBar.onClick',function(e){
+        var detail= e.detail;
+        console.log('tabBar.onClick ' + detail.index);
+      });
+
+      //
+      vm.loadBaseUrl();
+    },
+    methods: {
+      loadBaseUrl : function(){
+            var bundleUrl = this.$getConfig().bundleUrl;
+            bundleUrl = new String(bundleUrl);
+
+            var nativeBase;
+            var isAndroidAssets = bundleUrl.indexOf('file://assets/') >= 0;
+
+            var isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('VXCar.app') > 0;
+            if (isAndroidAssets) {
+              nativeBase = 'file://assets/';
+            }
+            else if (isiOSAssets) {
+              nativeBase = bundleUrl.substring(0, bundleUrl.lastIndexOf('/') + 1);
+            }
+            else {
+              var host = 'localhost:12500';
+              var matches = /\/\/([^\/]+?)\//.exec(this.$getConfig().bundleUrl);
+              if (matches && matches.length >= 2) {
+                host = matches[1];
+              }
+              nativeBase = 'http://' + host + '/' + this.dir + '/dist/';
+            }
+            var h5Base = './index.html?page=./' + this.dir + '/dist/';
+            //Native端
+            var base = nativeBase;
+            //H5端
+            if (typeof window === 'object') {
+              base = h5Base;
+            }
+            this.baseURL = base;
+
+           
+      },
+
+    },
+  }
+</script>

@@ -1,0 +1,54 @@
+<!-- 
+  询问底价页面
+  来自voidxin，创建于2016年12月20日,
+  转载请声明 
+-->
+
+<template>
+  <wxc-navpage data-role="none" height={{navBarHeight}} background-color=rgb(246,246,246) title={{title}} title-color=rgb(44,112,223)  left-item-src="http://7xwl0f.com1.z0.glb.clouddn.com/ic_arrow_nor@2x.png">
+	 <div style="height: 300;width: 320;margin-top: 100;margin-left: 80;justify-content: center;align-content: center;align-items: center;background-color: rgb(245,245,245);">
+	   <text>询问底价页面，有待继续实现</text>
+	  </div>
+ </wxc-navpage>
+</template>
+ <script>
+   require('weex-components');
+  
+  module.exports = {
+    data: {
+      navBarHeight: 128,
+      title: '询问底价',    
+    },
+    ready: function (){
+        var self = this;
+        self.baseConfig();
+        
+    },
+     methods:{
+
+     	baseConfig: function(){
+            var config  = this.$getConfig();
+            this.width = config.env.deviceWidth;
+            this.height = config.env.deviceHeight;
+            var url = config.bundleUrl;
+            this.$on('naviBar.leftItem.click',function(e){
+                //pop back
+                var params = {
+                    'animated' : 'true',
+                }
+                var navigator = require('@weex-module/navigator');
+                navigator.pop(params, function(e) {});
+            });
+        }
+
+       },
+
+        pop: function() {
+        var vm = this;
+        var params = {
+          'animated' : 'true',
+        }
+        vm.$call('navigator','pop',params, function () {});
+      },
+    }
+  </script>

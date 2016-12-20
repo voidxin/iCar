@@ -7,25 +7,47 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		50D53042685731FCB8960B7C /* libPods-VXCar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F91DE378B54D1228ECA15A /* libPods-VXCar.a */; };
+		572655D31E090301005836EF /* comment.js in Resources */ = {isa = PBXBuildFile; fileRef = 572655D01E090301005836EF /* comment.js */; };
+		572655D41E090301005836EF /* contentDetail.js in Resources */ = {isa = PBXBuildFile; fileRef = 572655D11E090301005836EF /* contentDetail.js */; };
+		572655D51E090301005836EF /* toutiao.js in Resources */ = {isa = PBXBuildFile; fileRef = 572655D21E090301005836EF /* toutiao.js */; };
+		572655D71E090AE0005836EF /* searchContent.js in Resources */ = {isa = PBXBuildFile; fileRef = 572655D61E090AE0005836EF /* searchContent.js */; };
+		572655D91E091563005836EF /* askedPrice.js in Resources */ = {isa = PBXBuildFile; fileRef = 572655D81E091563005836EF /* askedPrice.js */; };
 		57C309891E07709500452CBE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 57C309881E07709500452CBE /* main.m */; };
-		57C3098C1E07709500452CBE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57C3098B1E07709500452CBE /* AppDelegate.m */; };
-		57C3098F1E07709500452CBE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57C3098E1E07709500452CBE /* ViewController.m */; };
 		57C309921E07709500452CBE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57C309901E07709500452CBE /* Main.storyboard */; };
 		57C309941E07709500452CBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57C309931E07709500452CBE /* Assets.xcassets */; };
 		57C309971E07709500452CBE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57C309951E07709500452CBE /* LaunchScreen.storyboard */; };
+		57C309AB1E0776EC00452CBE /* ImageDownloadder.m in Sources */ = {isa = PBXBuildFile; fileRef = 57C309A01E0776EC00452CBE /* ImageDownloadder.m */; };
+		57C309AE1E0776ED00452CBE /* VXWeexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57C309A61E0776EC00452CBE /* VXWeexViewController.m */; };
+		57C309B01E0776ED00452CBE /* WXEventModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 57C309AA1E0776EC00452CBE /* WXEventModule.m */; };
+		57C309B41E07770400452CBE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57C309B31E07770400452CBE /* AppDelegate.m */; };
+		5B159BB61E097B680031AFE6 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B159BB51E097B680031AFE6 /* icon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C10B28E8D37B888A42A88EF /* Pods-VXCar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VXCar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VXCar/Pods-VXCar.debug.xcconfig"; sourceTree = "<group>"; };
+		4609F2F3717C1F24DB57E4EA /* Pods-VXCar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VXCar.release.xcconfig"; path = "Pods/Target Support Files/Pods-VXCar/Pods-VXCar.release.xcconfig"; sourceTree = "<group>"; };
+		572655D01E090301005836EF /* comment.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = comment.js; sourceTree = "<group>"; };
+		572655D11E090301005836EF /* contentDetail.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = contentDetail.js; sourceTree = "<group>"; };
+		572655D21E090301005836EF /* toutiao.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = toutiao.js; sourceTree = "<group>"; };
+		572655D61E090AE0005836EF /* searchContent.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = searchContent.js; sourceTree = "<group>"; };
+		572655D81E091563005836EF /* askedPrice.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = askedPrice.js; sourceTree = "<group>"; };
 		57C309841E07709500452CBE /* VXCar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VXCar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57C309881E07709500452CBE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		57C3098A1E07709500452CBE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		57C3098B1E07709500452CBE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		57C3098D1E07709500452CBE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		57C3098E1E07709500452CBE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		57C309911E07709500452CBE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		57C309931E07709500452CBE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		57C309961E07709500452CBE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		57C309981E07709500452CBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		57C3099F1E0776EC00452CBE /* ImageDownloadder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDownloadder.h; sourceTree = "<group>"; };
+		57C309A01E0776EC00452CBE /* ImageDownloadder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDownloadder.m; sourceTree = "<group>"; };
+		57C309A51E0776EC00452CBE /* VXWeexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VXWeexViewController.h; sourceTree = "<group>"; };
+		57C309A61E0776EC00452CBE /* VXWeexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VXWeexViewController.m; sourceTree = "<group>"; };
+		57C309A91E0776EC00452CBE /* WXEventModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXEventModule.h; sourceTree = "<group>"; };
+		57C309AA1E0776EC00452CBE /* WXEventModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXEventModule.m; sourceTree = "<group>"; };
+		57C309B21E07770400452CBE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		57C309B31E07770400452CBE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		5B159BB51E097B680031AFE6 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		E2F91DE378B54D1228ECA15A /* libPods-VXCar.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VXCar.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +55,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50D53042685731FCB8960B7C /* libPods-VXCar.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		572655DA1E093340005836EF /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				5B159BB51E097B680031AFE6 /* icon@2x.png */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		57C3097B1E07709400452CBE = {
 			isa = PBXGroup;
 			children = (
 				57C309861E07709500452CBE /* VXCar */,
 				57C309851E07709500452CBE /* Products */,
+				FD82CF7F961DD99F4AC95B5C /* Pods */,
+				BF3AFABC12BF9B5D4BDBC256 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,14 +91,15 @@
 		57C309861E07709500452CBE /* VXCar */ = {
 			isa = PBXGroup;
 			children = (
-				57C3098A1E07709500452CBE /* AppDelegate.h */,
-				57C3098B1E07709500452CBE /* AppDelegate.m */,
-				57C3098D1E07709500452CBE /* ViewController.h */,
-				57C3098E1E07709500452CBE /* ViewController.m */,
+				57C309B91E077B3C00452CBE /* bundlejs */,
+				57C309B11E07770400452CBE /* VXDelegate */,
+				57C309B51E07772100452CBE /* VXController */,
+				57C3099E1E0776EC00452CBE /* WeexHelper */,
 				57C309901E07709500452CBE /* Main.storyboard */,
 				57C309931E07709500452CBE /* Assets.xcassets */,
 				57C309951E07709500452CBE /* LaunchScreen.storyboard */,
 				57C309981E07709500452CBE /* Info.plist */,
+				572655DA1E093340005836EF /* Resource */,
 				57C309871E07709500452CBE /* Supporting Files */,
 			);
 			path = VXCar;
@@ -79,6 +113,65 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		57C3099E1E0776EC00452CBE /* WeexHelper */ = {
+			isa = PBXGroup;
+			children = (
+				57C3099F1E0776EC00452CBE /* ImageDownloadder.h */,
+				57C309A01E0776EC00452CBE /* ImageDownloadder.m */,
+				57C309A51E0776EC00452CBE /* VXWeexViewController.h */,
+				57C309A61E0776EC00452CBE /* VXWeexViewController.m */,
+				57C309A91E0776EC00452CBE /* WXEventModule.h */,
+				57C309AA1E0776EC00452CBE /* WXEventModule.m */,
+			);
+			path = WeexHelper;
+			sourceTree = "<group>";
+		};
+		57C309B11E07770400452CBE /* VXDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				57C309B21E07770400452CBE /* AppDelegate.h */,
+				57C309B31E07770400452CBE /* AppDelegate.m */,
+			);
+			path = VXDelegate;
+			sourceTree = "<group>";
+		};
+		57C309B51E07772100452CBE /* VXController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = VXController;
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		57C309B91E077B3C00452CBE /* bundlejs */ = {
+			isa = PBXGroup;
+			children = (
+				572655D61E090AE0005836EF /* searchContent.js */,
+				572655D81E091563005836EF /* askedPrice.js */,
+				572655D01E090301005836EF /* comment.js */,
+				572655D11E090301005836EF /* contentDetail.js */,
+				572655D21E090301005836EF /* toutiao.js */,
+			);
+			path = bundlejs;
+			sourceTree = "<group>";
+		};
+		BF3AFABC12BF9B5D4BDBC256 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E2F91DE378B54D1228ECA15A /* libPods-VXCar.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FD82CF7F961DD99F4AC95B5C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0C10B28E8D37B888A42A88EF /* Pods-VXCar.debug.xcconfig */,
+				4609F2F3717C1F24DB57E4EA /* Pods-VXCar.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -86,9 +179,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 57C3099B1E07709500452CBE /* Build configuration list for PBXNativeTarget "VXCar" */;
 			buildPhases = (
+				A0BC48B39776F28505777097 /* [CP] Check Pods Manifest.lock */,
 				57C309801E07709500452CBE /* Sources */,
 				57C309811E07709500452CBE /* Frameworks */,
 				57C309821E07709500452CBE /* Resources */,
+				468610BB6E3E96F4F56A4B51 /* [CP] Embed Pods Frameworks */,
+				0FD225465EFE86799F8D6C4B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -110,7 +206,7 @@
 				TargetAttributes = {
 					57C309831E07709500452CBE = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = XZ5PNLT2U8;
+						DevelopmentTeam = XQTC3C7XSE;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -138,22 +234,78 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				572655D51E090301005836EF /* toutiao.js in Resources */,
+				5B159BB61E097B680031AFE6 /* icon@2x.png in Resources */,
+				572655D31E090301005836EF /* comment.js in Resources */,
+				572655D41E090301005836EF /* contentDetail.js in Resources */,
+				572655D91E091563005836EF /* askedPrice.js in Resources */,
 				57C309971E07709500452CBE /* LaunchScreen.storyboard in Resources */,
 				57C309941E07709500452CBE /* Assets.xcassets in Resources */,
+				572655D71E090AE0005836EF /* searchContent.js in Resources */,
 				57C309921E07709500452CBE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0FD225465EFE86799F8D6C4B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VXCar/Pods-VXCar-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		468610BB6E3E96F4F56A4B51 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VXCar/Pods-VXCar-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A0BC48B39776F28505777097 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		57C309801E07709500452CBE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57C3098F1E07709500452CBE /* ViewController.m in Sources */,
-				57C3098C1E07709500452CBE /* AppDelegate.m in Sources */,
+				57C309B41E07770400452CBE /* AppDelegate.m in Sources */,
+				57C309AE1E0776ED00452CBE /* VXWeexViewController.m in Sources */,
 				57C309891E07709500452CBE /* main.m in Sources */,
+				57C309B01E0776ED00452CBE /* WXEventModule.m in Sources */,
+				57C309AB1E0776EC00452CBE /* ImageDownloadder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,10 +421,12 @@
 		};
 		57C3099C1E07709500452CBE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C10B28E8D37B888A42A88EF /* Pods-VXCar.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = XZ5PNLT2U8;
+				DEVELOPMENT_TEAM = XQTC3C7XSE;
 				INFOPLIST_FILE = VXCar/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = voidxin.VXCar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -281,10 +435,12 @@
 		};
 		57C3099D1E07709500452CBE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4609F2F3717C1F24DB57E4EA /* Pods-VXCar.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = XZ5PNLT2U8;
+				DEVELOPMENT_TEAM = XQTC3C7XSE;
 				INFOPLIST_FILE = VXCar/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = voidxin.VXCar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -310,6 +466,7 @@
 				57C3099D1E07709500452CBE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

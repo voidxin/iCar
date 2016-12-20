@@ -1,0 +1,362 @@
+
+<!-- 
+  首页
+  来自voidxin，创建于2016年12月20日,
+  转载请声明 
+-->
+<template>
+    <wxc-navpage data-role="none" height={{navBarHeight}} background-color=rgb(246,246,246) title={{navtitle}} title-color=rgb(44,112,223) >
+    <list>
+      <!-- 头部视图 -->
+     
+     <cell style="height: 395;background-color: #efefef;border-bottom-color: #eeeeee;border-bottom-width: 2; border-bottom-style: solid;">
+       <div style="height: 100;background-color: #efefef;margin-left: 0;margin-right: 0;margin-top: 0;justify-content: center;">
+          <div style="align-items: center;justify-content: center;align-content: center;background-color: white;border-radius: 7;flex-direction: row;margin-left: 50;margin-right: 50;height: 60" onclick="searchAction">
+             <image src="http://7xwl0f.com1.z0.glb.clouddn.com/ic_search_night_nor@2x.png" style="height: 34;width: 32;" resize="cover"></image>
+             <text style="font-size: 30;text-align: left;">点击搜索</text>
+          </div>
+        </div>
+        <div style="margin-top: 15;" >
+           <slider style=" flex-direction: row; ;height: 280;" interval="3000" auto-play="true">
+            <div style="" repeat="item in itemList" onclick="headViewClicked(item)">
+              <image style="height: 280;width:{{screenW}};" src="{{item.picCover}}" resize="cover"></image>
+              <text style="  position: absolute; bottom:0;left: 15; color: white;font-size: 35;background-color:rgb(34,34,34,1);">{{item.title}}</text>
+            </div>
+            <indicator style=" width:100; height:50; position:absolute;bottom: 0;right: 10;item-color:gray;item-selectedColor: white;item-size: 15;"></indicator>
+          </slider>
+       </div>
+     </cell>
+      <!--  tableView cell -->
+      <cell repeat="{{items}}"  onclick="toutiaoClicked($index)">
+         <div if={{type!=3}} style="height: 200;flex-direction: row;">
+                <div style="flex:0.3;justify-content: center;align-content: center;align-items: center;">
+                   <image src={{picCover}} style="width: 200;height: 150;" resize="cover"></image>
+                 </div>
+             <div style="flex:0.7;justify-content: center;">
+                 <div style="height: 150;">
+                     <div style="flex: 0.7;justify-content: center;">
+                       <text style="font-size: 35;margin-left: 15;margin-right: 15;text-align: left;lines:3;height: 100;" >{{title}}</text>
+                     </div>
+                     <div style="flex-direction: row;flex: 0.3;">
+                       <div style="flex: 0.7;justify-content: center;">
+                         <text style="margin-left: 15;margin-right: 5;font-size: 25;color: gray;">{{src}}</text>
+                       </div>
+                       <div style="flex:0.3;justify-content: center; flex-direction: row; justify-content: center;align-items: center;">
+                         <image src="http://7xwl0f.com1.z0.glb.clouddn.com/comment_comunity_ngt@2x.png" style="height: 25;width: 25;"></image>
+                         <text style="margin-right: 15;margin-left: 15;font-size: 25;color: gray;">{{commentCount}}</text>
+                       </div>
+                     </div>
+                </div>
+             </div>
+             <div style="background-color: rgb(237,237,237);height: 1;left: 0;right: 0;bottom: 0;position:absolute;"></div>
+         </div>
+
+        <!--  type=23时显示多张图片 -->
+        <!--  多图片的url分割显示还需要优化，这里暂且显示固定的三张图片 -->
+         <div if={{type==3}} style="height: 310;">
+            <div style="height: 70;justify-content: center;align-content: center;">
+              <text style="font-size: 35;lines:2;margin-left: 15;margin-right: 15;">{{title}}</text>
+            </div>
+            <div style="height:170;flex-direction: row;">
+              <div repeat="{{images}}" style="align-content: center;justify-content: center;align-items: center;">
+                 <image src="{{url}}" style="margin-left:15;height: 150;width: {{screenW / images.length - 20}};" resize="cover"></image>
+              </div>
+            </div>
+            <div style="height: 70; justify-content: center;flex-direction: row;">
+              <div style="flex:0.6;justify-content: center;">
+                <text style="left: 15;lines:1; text-align: left;color: gray;">{{src}}</text>
+              </div>
+               <div style="flex: 0.4;justify-content: center;">
+                <text style="right: 15;lines:1;text-align: right;color: gray;">{{commentCount}}评论</text>
+              </div>
+            </div>
+            <div style="background-color: rgb(237,237,237);height: 1;left: 0;right: 0;bottom: 0;position:absolute;"></div>
+         </div>
+      </cell>
+        <!--  刷新控件 -->
+       <refresh style="width: 750; padding: 30;" onrefresh="refreshData" display="{{refreshDisplay}}">
+        <text style="text-align: center;"> ↓ 刷新数据 </text>
+        <loading-indicator class="indicator"></loading-indicator>
+      </refresh>
+
+       <loading class="refresh-view" display="{{loading_display}}" onloading="onloading">
+                <text class="refresh-arrow" style="text-align: center; color:rgb(238, 162, 54)" if="{{(refresh_display==='hide')}}">Load more</text>
+                <loading-indicator style="height:60;width:60;color:#3192e1"></loading-indicator>
+        </loading>
+    </list>
+    </wxc-navpage>
+ 
+  
+</template>
+<style>
+   .refresh-view {
+    height: 120px;
+    width: 750px;
+    display: -ms-flex;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+   }
+</style>
+
+<script>
+  require('weex-components');
+  
+  module.exports = {
+    data: {
+      navBarHeight: 88,
+      navtitle: 'iCar新闻',
+      dir: '',
+      baseURL: '',
+      screenW: 0,
+      isLoaded: true,
+      page: 1,
+      loadingDisplay: 'hide',
+      refreshDisplay: 'hide',
+      loadingText: 'Loading...',
+      freshFlag:0,
+      itemList: [],
+      //网络获取的数据
+      items:[],
+      loading_display : 'hide',
+      page:1,
+       //多图片的url分割显示还需要优化，这里暂且显示固定的三张图片
+      images:[{url:'http://image.bitautoimg.com/wapimg-216-144/appimage/cms/20161219/w480_h320_2eeb3bfca665445ea89f792b0d0e0df5.jpg'},{url:'http://image.bitautoimg.com/wapimg-216-144/appimage/cms/20161219/w480_h320_fbdeb99a5986437ba35c5f2f2bc7a2d7.jpg'},
+      {url:'http://image.bitautoimg.com/wapimg-216-144/appimage/cms/20161219/w480_h320_28b3175dd16949e0b3a47b9d1335e1ba.jpg'}],
+          
+    },
+    ready: function (){
+        var self = this;
+        self.requestData();
+    },
+    created: function() {
+
+      var config  = this.$getConfig();
+      var url = config.bundleUrl;
+      this.title = decodeURIComponent(this._getUrlParam(url, 'icar_title'));
+
+      //宽度
+      //在5s或se上获取的宽度用在slider上有bug，宽度不够
+      if(config.env.deviceWidth == 640){
+        this.screenW = 750;
+      }else{
+        this.screenW = config.env.deviceWidth;
+      }
+      
+     
+
+      this.loadBaseUrl();
+
+      this.$getConfig(function (config) {
+        var env = config.env;
+        if(env.platform == 'iOS'){
+          var scale = env.scale;
+          var deviceWidth = env.deviceWidth / scale;
+          this.navBarHeight = 64.0 * 750.0 / deviceWidth;
+        }
+      }.bind(this));
+
+      this.$on('naviBar.rightItem.click',function(e){
+        duration = 2;
+        this.$call('modal', 'toast', {
+          'message': 'naviBar.rightItem.click',
+          'duration': duration
+          });
+      });
+
+      this.$on('naviBar.leftItem.click',function(e){
+        duration = 2;
+        this.$call('modal', 'toast', {
+          'message': 'naviBar.leftItem.click',
+          'duration': duration
+          });
+      });
+    },
+    methods: {
+      requestData : function(){
+         var self = this
+          var stream = require('@weex-module/stream')
+          var modal = require('@weex-module/modal')
+          var GET_URL = 'http://api.ycapp.yiche.com/appnews/toutiaov64/?page='+self.page+'&length=20&platform=2'
+          if (self.freshFlag == 0) {
+             self.toast('加载数据中...')
+          }
+         
+          stream.fetch({
+            method: 'GET',
+            url: GET_URL,
+            type: 'json'
+          }, function(ret) {  
+              if (self.freshFlag == 0) {
+                self.toast('数据加载完成') 
+              }
+              
+              if (typeof ret == 'string') {
+              ret = JSON.parse(ret)
+            }
+            if (!ret.ok) {
+              modal.alert({
+                message: '获取数据失败',
+                okTitle: '好'
+              })
+            } else {
+             
+              if (typeof ret.data == 'string') {
+                ret.data = JSON.parse(ret.data)
+              }
+              
+              if (self.page == 1) {
+                self.items = ret.data.data.list;
+                self.itemList.push(self.items[0]);
+                 self.itemList.push(self.items[1]);
+                  self.itemList.push(self.items[2]);
+                  self.items.splice(0,3);
+              }else{
+                for (var i = 0; i < ret.data.data.list.length; i++) {
+                  self.items.push(ret.data.data.list[i]);
+                }
+              }
+              //多图片的url分割显示还需要优化，这里暂且显示固定的三张图片
+              // for (var i = 0; i < self.items.length; i++) {
+              //    var dic = self.items[i];
+              //    var picCover = dic.picCover;
+              //    var type = dic.type;
+              //    var picArr = new Array();
+              //    if (type == 3) {
+              //     picArr = picCover.split(";");
+              //     var imageDic = {};
+              //     for (var j = 0; j < picArr.length; j++) {
+              //        var urlDic = {"url" : picArr[j]};
+              //        var key = 'url';
+              //        imageDic[key] = urlDic;
+              //     }
+              //     // var key = 'imageGroups'
+              //     // dic[key] = imageDic;
+              //     // self.items.splice(i,1,dic);
+              //      self.images.push(imageDic);
+              //    }
+              // }
+
+              
+            }
+          },function(response){
+            // self.toastTips('get:' + GET_URL);
+          });
+      },
+       onloading: function (e) {
+        this.loading_display = "show"
+        this.page = this.page + 1
+        this.requestData();
+        this.freshFlag = 1;
+        setTimeout(function () {
+          this.loading_display = 'hide'
+
+        }.bind(this), 1000)
+      },
+      toast: function(msg, duration) {
+        duration = duration || 2;
+        var modal = require('@weex-module/modal');
+        modal.toast({
+          'message': msg,
+          'duration': duration
+        });
+
+      },
+      push: function(newsId) {
+        var vm = this;
+        var params = {
+          'url':  vm.baseURL + 'contentDetail.js?icar_title=详情&newsId=' + newsId,
+          'animated' : 'true',
+        }
+        vm.$call('navigator','push',params, function () {});
+      },
+
+      pop: function() {
+        var vm = this;
+        var params = {
+          'animated' : 'true',
+        }
+        vm.$call('navigator','pop',params, function () {});
+      },
+       _getUrlParam: function(url, key){
+                var reg = new RegExp('[?|&]' + key + '=([^&]+)');
+                var match = url.match(reg);
+                return match && match[1];
+      },
+
+      loadBaseUrl : function(){
+            var bundleUrl = this.$getConfig().bundleUrl;
+            bundleUrl = new String(bundleUrl);
+
+            var nativeBase;
+            var isAndroidAssets = bundleUrl.indexOf('file://assets/') >= 0;
+
+            var isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('VXCar.app') > 0;
+            if (isAndroidAssets) {
+              nativeBase = 'file://assets/';
+            }
+            else if (isiOSAssets) {
+              nativeBase = bundleUrl.substring(0, bundleUrl.lastIndexOf('/') + 1);
+            }
+            else {
+              var host = 'localhost:12500';
+              var matches = /\/\/([^\/]+?)\//.exec(this.$getConfig().bundleUrl);
+              if (matches && matches.length >= 2) {
+                host = matches[1];
+              }
+              nativeBase = 'http://' + host + '/' + this.dir + '/dist/';
+            }
+            var h5Base = './index.html?page=./' + this.dir + '/dist/';
+            //Native端
+            var base = nativeBase;
+            //H5端
+            if (typeof window === 'object') {
+              base = h5Base;
+            }
+            this.baseURL = base;
+      },
+      toutiaoClicked : function(e){
+          var self = this
+          var dic = self.items[e];
+          var newsId = dic.newsId;
+         
+          self.push(newsId);
+      },
+      //搜索按钮点击,push到新的页面
+      searchAction : function(){
+          var vm = this;
+          var params = {
+            'url':  vm.baseURL + 'searchContent.js',
+            'animated' : 'true',
+          }
+          vm.$call('navigator','push',params, function () {});
+      },
+      //滚动视图点击事件
+      headViewClicked : function(item){
+         var self = this
+        self.push(item.newsId);
+
+
+
+      },
+    //   refreshData: function (e) {
+    //   var self = this
+    //   self.items = [];
+    //   self.itemList = [];
+    //   self.page = 1;
+    //   self.freshFlag = 1;
+    //   self.requestData();
+    //   self.refreshDisplay = 'show'
+    //    setTimeout(function () {
+    //       self.refreshDisplay = 'hide'
+    //       self.toast('刷新成功');
+
+    //     }.bind(self), 1000)
+      
+    // },
+    }
+  }
+</script>

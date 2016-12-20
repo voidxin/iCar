@@ -1,0 +1,261 @@
+<!-- 
+  评论视图
+  来自voidxin，创建于2016年12月20日,
+  转载请声明 
+-->
+<template>
+    <wxc-navpage data-role="none" height={{navBarHeight}} background-color=rgb(246,246,246) title={{title}} title-color=rgb(44,112,223)  left-item-src="http://7xwl0f.com1.z0.glb.clouddn.com/ic_arrow_nor@2x.png">
+   <list>
+	   <cell repeat="{{commentList}}">
+	       <div style="flex-direction:row;">
+              <div style="flex:0.2;align-content:center;align-items: center;margin-top:30;">
+                <image src="{{logo}}" style="height:80;width:80;border-radius:40;"></image>
+              </div>
+              <div style="flex:0.8; margin-top:30;">
+                <div style="height:50;flex-direction:row;">
+                  <text style="font-size:33;color:gray;">{{nickname}}</text>
+                  <image src="http://7xwl0f.com1.z0.glb.clouddn.com/zhongdaxingche_night_off@2x.png" style="height:25;width:75;margin-left:8;"></image>
+                </div>
+                <!-- 评论内容 -->
+
+                <div style="margin-top:15;">
+                  <text style="font-size:35;margin-right: 15;">{{content}}</text> 
+                </div>
+                <div style="flex-direction:row;margin-top:30;">
+                    <div style="flex:0.8;justify-content:center;">
+                      <text style="height:30;margin-right:15;font-size:25;color:gray;">{{createtime}}</text>
+                    </div>
+                    <div style="flex:0.2;justify-content:center;">
+                      <image src="http://7xwl0f.com1.z0.glb.clouddn.com/comment_comunity_ngt@2x.png" style="height: 35;width: 35;margin-right:15;"></image>
+                    </div>
+
+                </div>
+              </div>
+          </div>
+          <div style="height:30;margin-top:0"></div>
+          <div style="background-color: rgb(237,237,237);height: 1;left: 0;right: 0;bottom: 0;position:absolute;"></div>
+	   </cell>
+	    <!--  刷新控件 -->
+       <refresh style="width: 750; padding: 30;" onrefresh="refreshData" display="{{refreshDisplay}}">
+        <text style="text-align: center;"> ↓ Pull to refresh </text>
+        <loading-indicator class="indicator"></loading-indicator>
+      </refresh>
+
+       <loading class="refresh-view" display="{{loading_display}}" onloading="onloading">
+                <text class="refresh-arrow" style="text-align: center; color:rgb(238, 162, 54)" if="{{(refresh_display==='hide')}}">Load more</text>
+                <loading-indicator style="height:60;width:60;color:#3192e1"></loading-indicator>
+        </loading>
+   </list>
+    </wxc-navpage>
+</template>
+<style>
+   .refresh-view {
+    height: 120px;
+    width: 750px;
+    display: -ms-flex;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+   }
+</style>
+
+<script>
+  require('weex-components');
+  
+  module.exports = {
+    data: {
+      navBarHeight: 88,
+      title: 'Navigator',
+      dir: '',
+      baseURL: '',
+      screenW: 0,
+      isLoaded: true,
+      loadingDisplay: 'hide',
+      refreshDisplay: 'hide',
+      loadingText: 'Loading...',
+      loading_display : 'hide',
+      page:1,
+      commentList:[],
+      newsId:0,
+          
+    },
+    ready: function (){
+        var self = this;
+        self.requestData();
+        self.baseConfig();
+    },
+    created: function() {
+
+      var config  = this.$getConfig();
+      var url = config.bundleUrl;
+      this.title = decodeURIComponent(this._getUrlParam(url, 'icar_title'));
+      this.newsId = decodeURIComponent(this._getUrlParam(url,'newsId'));
+
+      //宽度
+      this.screenW = config.env.deviceWidth;
+
+     
+
+      this.loadBaseUrl();
+
+      this.$getConfig(function (config) {
+        var env = config.env;
+        if(env.platform == 'iOS'){
+          var scale = env.scale;
+          var deviceWidth = env.deviceWidth / scale;
+          this.navBarHeight = 64.0 * 750.0 / deviceWidth;
+        }
+      }.bind(this));
+
+     
+    },
+    methods: {
+      requestData : function(){
+         var self = this
+          var stream = require('@weex-module/stream')
+          var modal = require('@weex-module/modal')
+          var GET_URL = 'http://api.ycapp.yiche.com/appnews/getnewscommentlist/?newsid='+self.newsId+'&length=20&type=11&page='+self.page+'&hotOnly=false'
+        
+          self.toast('加载数据中...')
+          stream.fetch({
+            method: 'GET',
+            url: GET_URL,
+            type: 'json'
+          }, function(ret) {  
+              
+              self.toast('数据加载完成') 
+              if (typeof ret == 'string') {
+              ret = JSON.parse(ret)
+            }
+            if (!ret.ok) {
+              modal.alert({
+                message: '获取数据失败',
+                okTitle: '好'
+              })
+            } else {
+             
+              if (typeof ret.data == 'string') {
+                ret.data = JSON.parse(ret.data)
+              }
+              
+              
+              if (self.page == 1) {
+                self.commentList = ret.data.data.list;
+
+              }else{
+                for (var i = 0; i < ret.data.data.list.length; i++) {
+                  self.commentList.push(ret.data.data.list[i]);
+                }
+              }
+
+              
+            }
+          },function(response){
+            // self.toastTips('get:' + GET_URL);
+          });
+      },
+       onloading: function (e) {
+        this.loading_display = "show"
+        this.page = this.page + 1
+        this.requestData();
+        setTimeout(function () {
+          this.loading_display = 'hide'
+
+        }.bind(this), 1000)
+      },
+      toast: function(msg, duration) {
+        duration = duration || 6;
+        var modal = require('@weex-module/modal');
+        modal.toast({
+          'message': msg,
+          'duration': duration
+        });
+
+      },
+      push: function() {
+        var vm = this;
+        var params = {
+          'url':  vm.baseURL + 'contentDetail.js?title=ok',
+          'animated' : 'true',
+        }
+        vm.$call('navigator','push',params, function () {});
+      },
+
+      pop: function() {
+        var vm = this;
+        var params = {
+          'animated' : 'true',
+        }
+        vm.$call('navigator','pop',params, function () {});
+      },
+       
+
+      loadBaseUrl : function(){
+            var bundleUrl = this.$getConfig().bundleUrl;
+            bundleUrl = new String(bundleUrl);
+
+            var nativeBase;
+            var isAndroidAssets = bundleUrl.indexOf('file://assets/') >= 0;
+
+            var isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('VXCar.app') > 0;
+            if (isAndroidAssets) {
+              nativeBase = 'file://assets/';
+            }
+            else if (isiOSAssets) {
+              nativeBase = bundleUrl.substring(0, bundleUrl.lastIndexOf('/') + 1);
+            }
+            else {
+              var host = 'localhost:12500';
+              var matches = /\/\/([^\/]+?)\//.exec(this.$getConfig().bundleUrl);
+              if (matches && matches.length >= 2) {
+                host = matches[1];
+              }
+              nativeBase = 'http://' + host + '/' + this.dir + '/dist/';
+            }
+            var h5Base = './index.html?page=./' + this.dir + '/dist/';
+            //Native端
+            var base = nativeBase;
+            //H5端
+            if (typeof window === 'object') {
+              base = h5Base;
+            }
+            this.baseURL = base;
+      },
+       _getUrl: function(url, key){
+                var isExits = url.indexOf(key);
+                if(isExits > -1){
+                    return url.split('url=')[1];
+                }
+      },
+      _getUrlParam: function(url, key){
+          var reg = new RegExp('[?|&]' + key + '=([^&]+)');
+          var match = url.match(reg);
+          return match && match[1];
+      },
+      baseConfig: function(){
+            var config  = this.$getConfig();
+            this.width = config.env.deviceWidth;
+            this.height = config.env.deviceHeight;
+            var url = config.bundleUrl;
+            this.src = this._getUrl(url, 'weixin_url');
+            this.title = decodeURIComponent(this._getUrlParam(url,'icar_title'));
+
+            this.$on('naviBar.leftItem.click',function(e){
+                //pop back
+                var params = {
+                    'animated' : 'true',
+                }
+                var navigator = require('@weex-module/navigator');
+                navigator.pop(params, function(e) {});
+            });
+
+      },
+      refreshData: function (e) {
+     
+      },
+    }
+  }
+</script>
